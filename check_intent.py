@@ -1,7 +1,7 @@
-from google.cloud import dialogflow
-
-
 def detect_intent_texts(project_id, session_id, text, language_code):
+
+    from google.cloud import dialogflow
+
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
 

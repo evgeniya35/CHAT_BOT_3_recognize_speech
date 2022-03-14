@@ -22,7 +22,7 @@ def start(update: Update, context: CallbackContext) -> None:
 
 
 def echo(update: Update, context: CallbackContext) -> None:
-    # print(update.message.chat_id)
+    print(update.message.chat_id)
     intent = detect_intent_texts(
         context.bot_data['project_id'],
         update.message.chat_id,
