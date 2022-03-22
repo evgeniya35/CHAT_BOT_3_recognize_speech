@@ -18,17 +18,18 @@ logger = logging.getLogger(__file__)
 
 
 def handle_vk_message(event, vk_bot, project_id):
-    intent = detect_intent_texts(
+    answer = detect_intent_texts(
         project_id=project_id,
         session_id=event.user_id,
         text=event.text,
         language_code='ru-RU'
     )
-    vk_bot.messages.send(
-        user_id=event.user_id,
-        random_id=get_random_id(),
-        message=intent.query_result.fulfillment_text
-    )
+    if not answer.query_result.intent.is_fallback:
+        vk_bot.messages.send(
+            user_id=event.user_id,
+            random_id=get_random_id(),
+            message=answer.query_result.fulfillment_text
+        )
 
 
 def main():
