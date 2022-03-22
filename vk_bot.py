@@ -14,7 +14,7 @@ env.read_env()
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__file__)
 
 
 def handle_vk_message(event, vk_bot, project_id):
@@ -36,10 +36,12 @@ def main():
 
     vk_token = env.str('VK_APP_TOKEN')
     project_id = env.str('DF_PROJECT_ID')
+    logger.info('VK bot running...')
 
     vk_session = VkApi(token=vk_token)
     longpoll = VkLongPoll(vk_session)
     vk_bot = vk_session.get_api()
+    
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:

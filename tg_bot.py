@@ -12,7 +12,7 @@ env.read_env()
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__file__)
 
 
 def start(update: Update, context: CallbackContext) -> None:
@@ -35,6 +35,9 @@ def echo(update: Update, context: CallbackContext) -> None:
 def main():
     tg_token = env.str('TG_TOKEN')
     project_id = env.str('DF_PROJECT_ID')
+
+    logging.basicConfig(level=logging.INFO)
+    logger.info('TG bot running...')
 
     updater = Updater(tg_token)
     dispatcher = updater.dispatcher
