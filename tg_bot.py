@@ -53,8 +53,11 @@ def main():
     dispatcher.add_handler(MessageHandler(
         Filters.text & ~Filters.command, handle_message))
 
-    updater.start_polling()
-    updater.idle()
+    try:
+        updater.start_polling()
+        updater.idle()
+    except Exception as err:
+        logger.error(f'TG bot error {err}')
 
 
 if __name__ == '__main__':
